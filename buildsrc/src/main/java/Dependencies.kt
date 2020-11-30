@@ -20,6 +20,7 @@ object Libs {
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.2.0-rc01"
         const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha01"
+        const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
         const val activityKtx = "androidx.activity:activity-ktx:1.2.0-beta01"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-beta01"
 
@@ -27,7 +28,11 @@ object Libs {
 
         const val material = "com.google.android.material:material:1.2.1"
 
-        const val work = "androidx.work:work-runtime-ktx:2.4.0"
+        object Work {
+            const val version = "2.4.0"
+            const val runtimeKtx = "androidx.work:work-runtime-ktx:$version"
+            const val testing = "androidx.work:work-testing:$version"
+        }
 
         object Room {
             const val version = "2.2.5"
@@ -109,4 +114,6 @@ object Libs {
     }
 
     const val mockk = "io.mockk:mockk:1.10.0"
+
+    const val truth = "com.google.truth:truth:0.42"
 }

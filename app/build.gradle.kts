@@ -17,6 +17,7 @@ android {
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "com.jhughes.getstuffdone.MainTestRunner"
     }
 
     buildTypes {
@@ -42,6 +43,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.version
         kotlinCompilerVersion = Libs.Kotlin.version
+    }
+
+    packagingOptions {
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
     }
 }
 
@@ -70,7 +76,7 @@ dependencies {
     kapt(Libs.AndroidX.Room.compiler)
     implementation(Libs.AndroidX.Room.ktx)
     implementation(Libs.AndroidX.UI.tooling)
-    implementation(Libs.AndroidX.work)
+    implementation(Libs.AndroidX.Work.runtimeKtx)
 
     implementation(Libs.Accompanist.insets)
 
@@ -78,4 +84,33 @@ dependencies {
     kapt(Libs.Hilt.compiler)
     implementation(Libs.Hilt.AndroidX.viewModel)
     kapt(Libs.Hilt.AndroidX.compiler)
+
+//    testImplementation(Libs.AndroidX.coreTesting)
+//    testImplementation(Libs.mockk)
+//    testImplementation(Libs.Kotlin.Coroutines.test)
+//    testImplementation(Libs.JUnit.junit)
+//    testImplementation(Libs.Hilt.android)
+//    testImplementation(Libs.Hilt.testing)
+//    kaptTest(Libs.Hilt.compiler)
+//    testImplementation(Libs.AndroidX.Room.test)
+//    testImplementation(Libs.Hilt.AndroidX.viewModel)
+//    kaptTest(Libs.Hilt.AndroidX.compiler)
+
+    androidTestImplementation(Libs.JUnit.junit)
+    androidTestImplementation(Libs.AndroidX.coreTesting)
+    androidTestImplementation(Libs.AndroidX.Test.core)
+    androidTestImplementation(Libs.AndroidX.Test.rules)
+    androidTestImplementation(Libs.AndroidX.Test.runner)
+    androidTestImplementation(Libs.AndroidX.Test.espressoCore)
+    androidTestImplementation(Libs.AndroidX.Test.Ext.junit)
+    androidTestImplementation(Libs.AndroidX.Work.testing)
+    androidTestImplementation(Libs.AndroidX.UI.uiTest)
+    androidTestImplementation(Libs.Hilt.android)
+    androidTestImplementation(Libs.Hilt.testing)
+    androidTestImplementation(Libs.Kotlin.Coroutines.test)
+    androidTestImplementation(Libs.truth)
+    kaptAndroidTest(Libs.Hilt.compiler)
+    androidTestImplementation(Libs.Hilt.AndroidX.viewModel)
+    kaptAndroidTest(Libs.Hilt.AndroidX.compiler)
+
 }

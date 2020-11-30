@@ -2,6 +2,7 @@ package com.jhughes.getstuffdone.data.seeder
 
 import android.content.Context
 import androidx.work.CoroutineWorker
+import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.jhughes.getstuffdone.data.AppDatabase
 import com.jhughes.getstuffdone.data.domainGroupToLocalGroup
@@ -28,7 +29,7 @@ class SeedDatabaseWorker(
         )
 
         val groupTwo = GsdGroup(
-            id = 1,
+            id = 2,
             title = "Weekend prep",
             tasks = listOf(
                 GsdTask(5, "Make a plan", false),

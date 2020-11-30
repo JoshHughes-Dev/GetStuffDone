@@ -11,5 +11,5 @@ data class TaskEntity(
     val itemId: Int,
     val groupId : Int,
     val description : String,
-    val completed : Boolean,
+    val completed : Boolean = false,
 )
