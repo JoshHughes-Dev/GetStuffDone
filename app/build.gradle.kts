@@ -70,6 +70,7 @@ dependencies {
     kapt(Libs.AndroidX.Room.compiler)
     implementation(Libs.AndroidX.Room.ktx)
     implementation(Libs.AndroidX.UI.tooling)
+    implementation(Libs.AndroidX.work)
 
     implementation(Libs.Accompanist.insets)
 

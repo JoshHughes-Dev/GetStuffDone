@@ -27,6 +27,8 @@ object Libs {
 
         const val material = "com.google.android.material:material:1.2.1"
 
+        const val work = "androidx.work:work-runtime-ktx:2.4.0"
+
         object Room {
             const val version = "2.2.5"
 
