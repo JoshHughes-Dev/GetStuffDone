@@ -1,4 +1,4 @@
-package com.jhughes.getstuffdone
+package com.jhughes.getstuffdone.common
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
