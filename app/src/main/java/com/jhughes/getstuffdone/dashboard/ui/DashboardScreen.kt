@@ -1,6 +1,5 @@
 package com.jhughes.getstuffdone.dashboard.ui
 
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
@@ -8,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
+import com.jhughes.getstuffdone.common.Screen
 import com.jhughes.getstuffdone.dashboard.DashboardViewModel
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
@@ -34,14 +35,8 @@ fun DashboardScreen(
             }
         },
     ) {
-        ScrollableColumn {
-            groups.value.forEach {
-                Text(text = it.title)
-                it.tasks.forEach { task ->
-                    Text(text = task.toString())
-                }
-                Divider()
-            }
-        }
+        GroupsList(gsdGroups = groups.value, onClick = { group ->
+            navController.navigate(Screen.GroupDetails.route(group))
+        })
     }
 }
