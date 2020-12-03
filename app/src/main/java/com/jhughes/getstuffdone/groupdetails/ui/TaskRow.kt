@@ -234,7 +234,7 @@ fun EditableTaskRow(
 
         if (uiState is TaskRowUiState.Editing) {
             IconButton(onClick = { onDelete() }) {
-                Icon(asset = Icons.Default.Close)
+                Icon(imageVector = Icons.Default.Close)
             }
         }
     }

@@ -1,11 +1,11 @@
 object Libs {
 
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.0-alpha16"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.0-beta01"
 
     const val junit = "junit:junit:4.13"
 
     object Kotlin {
-        const val version = "1.4.10"
+        const val version = "1.4.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
@@ -46,7 +46,7 @@ object Libs {
         }
 
         object Compose {
-            const val version = "1.0.0-alpha07"
+            const val version = "1.0.0-alpha08"
 
             const val compiler = "androidx.compose.compiler:compiler:$version"
             const val runtime = "androidx.compose.runtime:runtime:$version"
@@ -59,17 +59,17 @@ object Libs {
             const val animation = "androidx.compose.animation:animation:$version"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
             const val test = "androidx.compose.test:test-core:$version"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha02"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha03"
+
+            object UI {
+                const val tooling = "androidx.ui:ui-tooling:1.0.0-alpha07"
+                const val uiTest = "androidx.ui:ui-test:1.0.0-alpha07"
+            }
         }
 
         object Lifecycle {
             private const val version = "2.3.0-beta01"
             const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
-        }
-
-        object UI {
-            const val tooling = "androidx.ui:ui-tooling:${Compose.version}"
-            const val uiTest = "androidx.ui:ui-test:${Compose.version}"
         }
 
         object Test {
@@ -104,7 +104,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.3.3.1"
+        private const val version = "0.4.0"
         const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"
     }
 

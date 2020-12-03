@@ -31,7 +31,7 @@ fun DashboardScreen(
             FloatingActionButton(onClick = {
                 viewModel.testCreateNewGroup()
             }) {
-                Icon(asset = Icons.Outlined.Add)
+                Icon(imageVector = Icons.Outlined.Add)
             }
         },
     ) {
