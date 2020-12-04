@@ -1,4 +1,4 @@
-package com.jhughes.getstuffdone.ui
+package com.jhughes.getstuffdone.common.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

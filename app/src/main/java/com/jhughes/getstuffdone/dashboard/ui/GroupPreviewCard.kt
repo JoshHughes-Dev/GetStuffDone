@@ -9,13 +9,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.jhughes.getstuffdone.domain.model.GsdGroup
 import com.jhughes.getstuffdone.domain.model.GsdTask
-import com.jhughes.getstuffdone.ui.GetStuffDoneTheme
+import com.jhughes.getstuffdone.common.theme.GetStuffDoneTheme
 
 @Composable
 fun GroupPreviewCard(
@@ -53,7 +54,12 @@ fun GroupPreviewCard(
                         modifier = Modifier.padding(start = 4.dp),
                         fontSize = 14.sp,
                         overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                        maxLines = 1,
+                        textDecoration = if (task.isCompleted) {
+                            TextDecoration.LineThrough
+                        } else {
+                            null
+                        }
                     )
                 }
             }

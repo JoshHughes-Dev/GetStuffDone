@@ -10,11 +10,15 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.jhughes.getstuffdone.domain.model.GsdGroup
 import com.jhughes.getstuffdone.domain.model.GsdTask
-import com.jhughes.getstuffdone.ui.GetStuffDoneTheme
+import com.jhughes.getstuffdone.common.theme.GetStuffDoneTheme
 
 @Composable
-fun GroupsList(gsdGroups: List<GsdGroup>, onClick: (GsdGroup) -> Unit = {}) {
-    ScrollableColumn(modifier = Modifier.padding(horizontal = 12.dp)) {
+fun GroupsList(
+    modifier: Modifier = Modifier,
+    gsdGroups: List<GsdGroup>,
+    onOpenGroupDetails: (GsdGroup) -> Unit = {}
+) {
+    ScrollableColumn(modifier = modifier.padding(horizontal = 12.dp)) {
 
         val groupsPartition = gsdGroups.partition { it.isCompleted() }
 
@@ -23,7 +27,7 @@ fun GroupsList(gsdGroups: List<GsdGroup>, onClick: (GsdGroup) -> Unit = {}) {
             GroupBlock(
                 title = "Uncompleted",
                 gsdGroups = groupsPartition.second,
-                onClick = onClick
+                onClick = onOpenGroupDetails
             )
         }
 
@@ -32,7 +36,7 @@ fun GroupsList(gsdGroups: List<GsdGroup>, onClick: (GsdGroup) -> Unit = {}) {
             GroupBlock(
                 title = "Completed",
                 gsdGroups = groupsPartition.first,
-                onClick = onClick
+                onClick = onOpenGroupDetails
             )
         }
     }
@@ -53,7 +57,7 @@ fun GroupBlock(
     Row(Modifier.fillMaxWidth()) {
         Box(Modifier.weight(1f)) {
             Column(Modifier.fillMaxWidth()) {
-                map[0].forEachIndexed { index, group ->
+                map.getOrNull(0)?.forEachIndexed { index, group ->
                     val padding = if (index == 0) 0.dp else 12.dp
                     GroupPreviewCard(
                         modifier = Modifier.padding(top = padding),
@@ -66,7 +70,7 @@ fun GroupBlock(
         Spacer(modifier = Modifier.size(12.dp))
         Box(Modifier.weight(1f)) {
             Column(modifier = Modifier.fillMaxWidth()) {
-                map[1].forEachIndexed { index, group ->
+                map.getOrNull(1)?.forEachIndexed { index, group ->
                     val padding = if (index == 0) 0.dp else 12.dp
                     GroupPreviewCard(
                         modifier = Modifier.padding(top = padding),

@@ -25,13 +25,14 @@ class GroupRepositoryImpl @Inject constructor(private val groupDao: GroupDao) : 
         }
     }
 
-    override suspend fun createGroup(gsdGroup: GsdGroup) {
+    override suspend fun saveGroup(gsdGroup: GsdGroup) : Int {
         val group = domainGroupToLocalGroup(gsdGroup).group
-        groupDao.insertGroup(group)
+        val longId : Long = groupDao.insertGroup(group)
+        return longId.toInt()
     }
 
     override suspend fun deleteGroup(gsdGroup: GsdGroup) {
-        val group = domainGroupToLocalGroup(gsdGroup).group
-        groupDao.deleteGroup(group)
+        val groupAndTasks = domainGroupToLocalGroup(gsdGroup)
+        groupDao.deleteGroup(groupAndTasks.group)
     }
 }
