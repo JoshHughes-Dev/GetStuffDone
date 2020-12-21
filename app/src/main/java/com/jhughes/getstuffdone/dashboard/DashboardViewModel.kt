@@ -30,9 +30,15 @@ class DashboardViewModel @ViewModelInject constructor(
         }
     ).flattenMerge()
 
+    fun createGroup(group: GsdGroup) {
+        viewModelScope.launch(Dispatchers.IO) {
+            selectedGroupId.value = groupRepository.createGroup(group)
+        }
+    }
+
     fun saveGroup(group: GsdGroup) {
         viewModelScope.launch(Dispatchers.IO) {
-            selectedGroupId.value = groupRepository.saveGroup(group)
+            groupRepository.updateGroup(group)
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.ui.tooling.preview.Preview
 import com.jhughes.getstuffdone.domain.model.GsdGroup
 import com.jhughes.getstuffdone.domain.model.GsdTask
 import com.jhughes.getstuffdone.common.theme.GetStuffDoneTheme
+import com.jhughes.getstuffdone.common.ui.StaggeredVerticalGrid
 
 @Composable
 fun GroupsList(
@@ -24,60 +25,29 @@ fun GroupsList(
 
         //uncompleted
         if (groupsPartition.second.isNotEmpty()) {
-            GroupBlock(
-                title = "Uncompleted",
-                gsdGroups = groupsPartition.second,
-                onClick = onOpenGroupDetails
-            )
+            Text(text = "Uncompleted", modifier = Modifier.padding(top = 24.dp, bottom = 12.dp))
+            StaggeredVerticalGrid(
+                modifier = Modifier.fillMaxWidth(),
+                items = groupsPartition.second
+            ) { item: GsdGroup ->
+                GroupPreviewCard(
+                    gsdGroup = item,
+                    onClick = onOpenGroupDetails
+                )
+            }
         }
 
         //completed
         if (groupsPartition.first.isNotEmpty()) {
-            GroupBlock(
-                title = "Completed",
-                gsdGroups = groupsPartition.first,
-                onClick = onOpenGroupDetails
-            )
-        }
-    }
-}
-
-@Composable
-fun GroupBlock(
-    title: String,
-    gsdGroups: List<GsdGroup>,
-    onClick: (GsdGroup) -> Unit = {}
-) {
-    val map = gsdGroups.withIndex()
-        .groupBy { it.index % 2 }
-        .map { it.value.map { it.value } }
-
-    Text(text = title, modifier = Modifier.padding(top = 24.dp, bottom = 12.dp))
-
-    Row(Modifier.fillMaxWidth()) {
-        Box(Modifier.weight(1f)) {
-            Column(Modifier.fillMaxWidth()) {
-                map.getOrNull(0)?.forEachIndexed { index, group ->
-                    val padding = if (index == 0) 0.dp else 12.dp
-                    GroupPreviewCard(
-                        modifier = Modifier.padding(top = padding),
-                        gsdGroup = group,
-                        onClick = onClick
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.size(12.dp))
-        Box(Modifier.weight(1f)) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                map.getOrNull(1)?.forEachIndexed { index, group ->
-                    val padding = if (index == 0) 0.dp else 12.dp
-                    GroupPreviewCard(
-                        modifier = Modifier.padding(top = padding),
-                        gsdGroup = group,
-                        onClick = onClick
-                    )
-                }
+            Text(text = "Completed", modifier = Modifier.padding(top = 24.dp, bottom = 12.dp))
+            StaggeredVerticalGrid(
+                modifier = Modifier.fillMaxWidth(),
+                items = groupsPartition.first
+            ) { item: GsdGroup ->
+                GroupPreviewCard(
+                    gsdGroup = item,
+                    onClick = onOpenGroupDetails
+                )
             }
         }
     }

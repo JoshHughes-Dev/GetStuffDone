@@ -24,6 +24,9 @@ interface GroupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGroup(group : GroupEntity) : Long
 
+    @Update
+    fun updateGroup(group: GroupEntity)
+
     @Delete
     fun deleteGroup(group : GroupEntity)
 

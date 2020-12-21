@@ -13,7 +13,8 @@ import java.util.*
         entity = GroupEntity::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("groupId"),
-        onDelete = CASCADE
+        onDelete = CASCADE,
+        onUpdate = CASCADE
     )]
 )
 data class TaskEntity(

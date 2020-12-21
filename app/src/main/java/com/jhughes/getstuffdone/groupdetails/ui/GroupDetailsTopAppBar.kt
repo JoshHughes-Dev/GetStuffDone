@@ -22,7 +22,7 @@ import com.jhughes.getstuffdone.common.theme.progressIndicatorBackground
 @Composable
 fun GroupDetailsTopAppBar(
     modifier: Modifier = Modifier,
-    elevation : Dp = 0.dp,
+    elevation: Dp = 0.dp,
     tasksCompletedCount: Int? = null,
     totalTasksCount: Int? = null,
     onBackPressed: () -> Unit = {},
@@ -39,7 +39,7 @@ fun GroupDetailsTopAppBar(
                 }
             }
         }
-        if (totalTasksCount != null && tasksCompletedCount != null) {
+        if (totalTasksCount?.let { it > 0 } == true && tasksCompletedCount != null) {
             ConstraintLayout(Modifier.fillMaxHeight().weight(1f)) {
                 val (title, progress) = createRefs()
                 createVerticalChain(title, progress, chainStyle = ChainStyle.Packed)

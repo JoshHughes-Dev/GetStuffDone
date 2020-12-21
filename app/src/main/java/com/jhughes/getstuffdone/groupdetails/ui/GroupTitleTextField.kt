@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SoftwareKeyboardController
@@ -17,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun GroupTitleTextField(
-    title : MutableState<String> = mutableStateOf(""),
+    title: MutableState<String> = mutableStateOf(""),
     onSaveTitle: (String) -> Unit
 ) {
     // Grab a reference to the keyboard controller whenever text input starts

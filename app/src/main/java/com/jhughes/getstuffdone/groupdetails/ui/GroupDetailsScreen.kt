@@ -4,27 +4,14 @@ import android.util.Log
 import androidx.compose.animation.animate
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.ExperimentalFocus
 import androidx.compose.ui.layout.*
-import androidx.compose.ui.platform.AmbientWindowManager
-import androidx.compose.ui.text.SoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.annotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.ui.tooling.preview.Preview
 import com.jhughes.getstuffdone.dashboard.DashboardViewModel
@@ -40,12 +27,9 @@ fun GroupDetailsScreen(
     viewModel: DashboardViewModel,
     navController: NavController
 ) {
-    val scrollState = rememberScrollState()
-    val appBarElevation = animate(if (scrollState.value > 0f) 8.dp else 0.dp)
-
     val selectedGroup: GsdGroup? by viewModel.getSelectedGroup().collectAsState(null)
 
-    var showDeleteConfirmationDialog by savedInstanceState() { false }
+    var showDeleteConfirmationDialog by savedInstanceState { false }
     if (showDeleteConfirmationDialog) {
         DeleteConfirmationDialog(
             onConfirm = {
@@ -62,7 +46,7 @@ fun GroupDetailsScreen(
 
             GroupDetailsTopAppBar(
                 modifier = Modifier.statusBarsPadding(),
-                elevation = appBarElevation,
+                elevation = 8.dp,
                 tasksCompletedCount = selectedGroup?.tasks?.filter { it.isCompleted }?.size,
                 totalTasksCount = selectedGroup?.tasks?.size,
                 onBackPressed = {
@@ -75,15 +59,15 @@ fun GroupDetailsScreen(
 
             var onSaveAndContinue by remember { mutableStateOf(false) }
 
-            ScrollableColumn(
-                scrollState = scrollState
-            ) {
+            ScrollableColumn {
                 GroupTitleTextField(
                     title = mutableStateOf(selectedGroup?.title ?: ""),
                     onSaveTitle = { newTitle ->
-                        val groupToSave = selectedGroup?.copy(title = newTitle)
-                            ?: GsdGroup(title = newTitle)
-                        viewModel.saveGroup(groupToSave)
+                        if (selectedGroup != null) {
+                            viewModel.saveGroup(selectedGroup!!.copy(title = newTitle))
+                        } else {
+                            viewModel.createGroup(GsdGroup(title = newTitle))
+                        }
                     })
 
                 (selectedGroup?.tasks ?: emptyList()).forEachIndexed { index, task ->
@@ -99,19 +83,15 @@ fun GroupDetailsScreen(
                         }
                     )
                 }
-                AddTaskRow(
-                    modifier = Modifier.onGloballyPositioned {
-                        Log.d(
-                            "LayoutTest",
-                            "row : x: ${it.positionInRoot.x}, y: ${it.positionInRoot.y}"
-                        )
-                    },
-                    startAsEditing = onSaveAndContinue,
-                    onSaveNewTask = { checked, text ->
-                        onSaveAndContinue = true
-                        viewModel.saveTask(GsdTask(0, text, checked))
-                    }
-                )
+                if (selectedGroup != null) {
+                    AddTaskRow(
+                        startAsEditing = onSaveAndContinue,
+                        onSaveNewTask = { checked, text ->
+                            onSaveAndContinue = true
+                            viewModel.saveTask(GsdTask(0, text, checked))
+                        }
+                    )
+                }
             }
         }
     }

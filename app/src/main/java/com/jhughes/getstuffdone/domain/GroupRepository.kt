@@ -9,7 +9,9 @@ interface GroupRepository {
 
     fun getGroup(id: Int) : Flow<GsdGroup>
 
-    suspend fun saveGroup(gsdGroup: GsdGroup) : Int
+    suspend fun createGroup(gsdGroup: GsdGroup) : Int
+
+    suspend fun updateGroup(gsdGroup: GsdGroup)
 
     suspend fun deleteGroup(gsdGroup: GsdGroup)
 }
